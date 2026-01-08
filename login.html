@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Firebase SDKs -->
+ <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+ 
+
+ <script>
+  // Your Firebase config
+   const firebaseConfig = {
+  apiKey: "AIzaSyAWHOjEiQ3_BOALQokf9KSWkzariT0WARs",
+  authDomain: "my-room-match.firebaseapp.com",
+  projectId: "my-room-match",
+  storageBucket: "my-room-match.firebasestorage.app",
+  messagingSenderId: "29511216593",
+  appId: "1:29511216593:web:56d143598fb32aab8944f0",
+  measurementId: "G-PV616XMSRT"}
+  
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+
+   const auth = firebase.auth();
+
+ </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Room Match - Login</title>
+  <link rel="stylesheet" href="./CSS/login.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+  
+</head>
+
+
+
+<body>
+  <div class="container">
+    <div class="left-pane">
+      <img src="./icons/logo.png" alt="WE LIVE Logo" class="logo" />
+      <h1>MY ROOM MATCH</h1>
+      <p>Empowering women through shared living spaces</p>
+    </div>
+    <div class="right-pane">
+      <form class="form-box" id="loginForm">
+        <h1>Login</h1>
+        <input type="email" placeholder="Email" required id="loginEmail"/>
+        <input type="password" placeholder="Password" required id="loginPassword"/>
+        <button type="submit">Log In</button>
+        <a href="#">Forgot password?</a>
+        <p>Don’t have an account? <a href="signup.html">Sign up</a></p>
+      </form>
+    </div>
+  </div>
+
+
+
+
+  <script>
+  // ✅ Auto-redirect if already logged in
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    window.location.href = "dashboard.html";
+  }
+});
+
+// ✅ Login form submission
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      console.log("Login successful!");
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      console.error("Login failed:", error.message);
+      document.getElementById("errorMessage").textContent = "Invalid email or password.";
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+services:
+  - type: cron
+    name: ai-matchmaker
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: ./start.sh
+    schedule: "*/15 * * * *"  # runs every 15 minutes
+    envVars:
+      - key: GOOGLE_APPLICATION_CREDENTIALS
+        value: serviceAccountKey.json

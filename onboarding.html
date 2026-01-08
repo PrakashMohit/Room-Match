@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
+
+<script>
+  // Your Firebase config
+  const firebaseConfig = {
+  apiKey: "AIzaSyAWHOjEiQ3_BOALQokf9KSWkzariT0WARs",
+  authDomain: "my-room-match.firebaseapp.com",
+  projectId: "my-room-match",
+  storageBucket: "my-room-match.firebasestorage.app",
+  messagingSenderId: "29511216593",
+  appId: "1:29511216593:web:56d143598fb32aab8944f0",
+  measurementId: "G-PV616XMSRT"
+};
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+
+  const db = firebase.firestore(); 
+
+  
+
+
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Room Match - Onboarding</title>
+  <link rel="stylesheet" href="./CSS/onboarding.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+</head>
+<body>
+  <div class="container">
+    <div class="left-pane">
+      <img src="./icons/logo.png" alt="WE LIVE Logo" class="logo" />
+      <h1>MY ROOM MATCH</h1>
+      <p>Empowering women through shared living spaces</p>
+    </div>
+    <div class="right-pane">
+      <form class="form-box" enctype="multipart/form-data" form id="onboardingForm">
+        <h1 id="welcomeMessage">Welcome!</h1>
+
+
+        <label for="address">Address <span>*</span></label>
+        <textarea id="address" name="address" required placeholder="Enter your full address"></textarea>
+
+        <label for="phone">Phone Number <span>*</span></label>
+        <input type="tel" id="phone" name="phone" required placeholder="e.g., +91 9876543210" />
+
+        <label for="photo">Upload a Profile Photo <span>*</span></label>
+        <input type="file" id="photo" name="photo" accept="image/*" required />
+
+        <button type="submit">Continue</button>
+      </form>
+    </div>
+  </div>
+
+
+
+  <script>
+  // ✅ Show displayName
+  auth.onAuthStateChanged((user) => {
+    if (user && user.displayName) {
+      document.getElementById("welcomeMessage").textContent = `Welcome, ${user.displayName}`;
+    }
+  });
+
+  // ✅ Form submission logic
+  document.getElementById("onboardingForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const photoFile = document.getElementById("photo").files[0];
+
+    try {
+      // Cloudinary upload
+      const formData = new FormData();
+      formData.append("file", photoFile);
+      formData.append("upload_preset", "unsigned_preset"); // change this
+      const cloudinaryRes = await fetch("https://api.cloudinary.com/v1_1/dexoyiip5/image/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await cloudinaryRes.json();
+      const photoURL = data.secure_url;
+
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          const name = user.displayName;
+          const email = user.email;
+
+          db.collection("users").doc(user.uid).set({
+            name: name,
+            email: email,
+            phone: phone,
+            address: address,
+            photoURL: photoURL,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true })
+          .then(() => {
+            alert("Onboarding complete!");
+            window.location.href = "onboarding2.html";
+          });
+        }
+      });
+
+    } catch (error) {
+      console.error("Onboarding error:", error);
+      alert("Something went wrong.");
+    }
+  });
+</script>
+
+
+</body>
+</html>

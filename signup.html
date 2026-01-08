@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<!-- Firebase SDKs -->
+ <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+ 
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Your Firebase config
+  const firebaseConfig = {
+  apiKey: "AIzaSyAWHOjEiQ3_BOALQokf9KSWkzariT0WARs",
+  authDomain: "my-room-match.firebaseapp.com",
+  projectId: "my-room-match",
+  storageBucket: "my-room-match.firebasestorage.app",
+  messagingSenderId: "29511216593",
+  appId: "1:29511216593:web:56d143598fb32aab8944f0",
+  measurementId: "G-PV616XMSRT"
+};
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+
+  const db = firebase.firestore(); 
+
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Room Match - Sign Up</title>
+  <link rel="stylesheet" href="./CSS/signup.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+
+
+
+  
+</head>
+<body>
+  <div class="container">
+    <div class="left-pane">
+      <img src="./icons/logo.png" alt="WE LIVE Logo" class="logo" />
+      <h1>MY ROOM MATCH</h1>
+      <p>Empowering women through shared living spaces</p>
+    </div>
+    <div class="right-pane">
+      <form class="form-box" id="signupForm">
+        <h1>Sign Up</h1>
+        <input type="text" placeholder="Full Name" required id="signupName" />
+        <input type="email" placeholder="Email" required id="signupEmail" />
+        <input type="password" placeholder="Password" required id="signupPassword" />
+        <input type="password" placeholder="Confirm Password" required id="signupConfirmPassword" />
+        <button type="submit">Create Account</button>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+  
+<script>
+  document.getElementById("signupForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("signupName").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
+      await user.updateProfile({
+        displayName: name
+      });
+
+      alert("Signup successful!");
+      window.location.href = "onboarding.html";
+
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Signup failed: " + error.message);
+    }
+  });
+</script>
+
+
+</body>
+
+</html>
+

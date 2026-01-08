@@ -1,0 +1,8 @@
+/*
+  Content-Security-Policy:
+    default-src 'self' https://res.cloudinary.com https://www.gstatic.com https://*.firebaseio.com https://www.googleapis.com https://securetoken.googleapis.com https://backend.omnidim.io https://www.omnidim.io;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://*.firebaseio.com https://www.googleapis.com https://securetoken.googleapis.com https://backend.omnidim.io https://www.omnidim.io;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' https://res.cloudinary.com data:;
+    frame-src https://www.omnidim.io;
+    connect-src *;

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard - My Room Match</title>
+  <link rel="stylesheet" href="./dashboard.css">
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="./icons/logo.png" alt="Logo"> 
+      <span>My Room Match</span>
+    </div>
+
+    <div class="user">
+      <img id="userPhoto" src="./assets/default-user.png" alt="User Photo">
+      <span id="userName">Loading...</span>
+    </div>
+  </header>
+
+  <main>
+    <form id="roomSelectionForm">
+      
+      <section class="section-card">
+        <h1>Your Best Match</h1>
+        <div id="bestMatchContainer" class="card-grid"></div>
+      </section>
+
+      <section class="section-card">
+        <h1>Other Matches</h1>
+        <div id="otherMatchesContainer" class="card-grid"></div>
+      </section>
+
+      <section class="section-card">
+        <h1>Recommended Room</h1>
+        <div id="recommendedRoomContainer" class="room-grid"></div>
+      </section>
+
+      <section class="section-card">
+        <h1>Available Rooms</h1>
+        <div id="roomStatus"></div>
+      </section>
+      
+    </form>
+  </main>
+
+  <!-- Fixed footer for price summary and confirmation -->
+  <footer class="fixed-footer">
+    <div class="summary-details">
+      <p>Base Price: ₹<span id="basePrice">0</span></p>
+      <p>GST (18%): ₹<span id="gstAmount">0</span></p>
+      <p>Platform Fee: ₹<span id="platformFee">0</span></p>
+      <hr>
+      <p><strong>Total: ₹<span id="totalPrice">0</span></strong></p>
+      <button type="submit" id="confirmAndPayBtn">Pay & Confirm</button>
+    </div>
+  </footer>
+
+  <script src="./dashboardf.js"></script>
+</body>
+</html>

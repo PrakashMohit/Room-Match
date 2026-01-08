@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Room Match – Survey</title>
+  <link rel="stylesheet" href="./css/survey.css">
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://*.firebaseio.com https://www.googleapis.com https://securetoken.googleapis.com https://backend.omnidim.io 'unsafe-inline'; connect-src 'self' https://firestore.googleapis.com https://securetoken.googleapis.com https://backend.omnidim.io; style-src 'self' 'unsafe-inline';">
+  
+
+
+  
+</head>
+<body>
+  <div class="survey-container">
+    <h1>Help us match you better.</h1>
+    
+    <form id="surveyForm">
+      <!-- Required Questions -->
+      <label>1. What is your preferred sleeping time? *</label>
+      <input type="text" name="sleepTime" required placeholder="e.g 10:00 PM to 6:00 AM"/>
+
+      <label>2. What are your dietary preferences? *</label>
+      <input type="text" name="diet" required placeholder="e.g Vegetarian, Vegan, etc." />
+
+      <label>3. What type of room do you prefer? (Single/Twin/Triple) *</label>
+      <input type="text" name="roomType" required placeholder="e.g Single" />
+
+      <label>4. Preferred floor number? *</label>
+      <input type="number" name="floor" required placeholder="e.g 1, 2, 3..." min="1" max="5"/>
+
+      <label>5. What is your profession? *</label>
+      <select name="Profession" required>
+        <option value="">Select</option>
+        <option value="Student">Student</option>
+        <option value="Working-Professional">Working-Professional</option>
+      </select>
+
+      <!-- Optional / Personalized Questions -->
+      <div id="customQuestions"></div>
+      <label>6. Any other preferences or habits? (Optional)</label>
+      <textarea name="miscPref"></textarea>
+
+      <button type="submit">Submit Survey</button>
+    </form>
+  </div>
+
+  
+
+  
+  
+  <script id="omnidimension-web-widget" async src="https://backend.omnidim.io/web_widget.js?secret_key=eb075add74758161d3e65e8e21614685" ></script>
+  <script src="./js/survey.js"></script>
+</body>
+</html>
