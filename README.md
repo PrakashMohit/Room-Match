@@ -9,3 +9,4 @@ A full stack AI integrated app which is designed for women to find their co - li
 <br>
 Now hosted on <a>roommatch2.netlify.app</a>
 <p>Try it out</p>
+<p>It is also AI-enabled using llama3 for matchmaking along with algos for faster buffers</p>
